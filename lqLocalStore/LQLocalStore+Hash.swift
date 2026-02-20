@@ -11,8 +11,12 @@ public struct CacheHashMeta: Codable {
 extension LQLocalStore {
     /// 计算数据SHA256
     public func sha256(_ data: Data) -> String {
-        let digest = SHA256.hash(data: data)
-        return digest.map { String(format: "%02x", $0) }.joined()
+        if #available(iOS 13.0, macOS 10.15, *) {
+            let digest = SHA256.hash(data: data)
+            return digest.map { String(format: "%02x", $0) }.joined()
+        } else {
+            return ""
+        }
     }
     /// 保存缓存文件hash（以磁盘实际数据为准，兼容压缩/非压缩）
     public func saveHash(for fileName: String, data: Data? = nil) {

@@ -5,11 +5,19 @@ import Compression
 
 extension LQLocalStore {
     func compress(_ data: Data) -> Data? {
-        guard let compressed = (try? (data as NSData).compressed(using: .lz4)) as Data? else { return nil }
-        return compressed
+        if #available(iOS 13.0, macOS 10.15, *) {
+            guard let compressed = (try? (data as NSData).compressed(using: .lz4)) as Data? else { return nil }
+            return compressed
+        } else {
+            return nil
+        }
     }
     func decompress(_ data: Data) -> Data? {
-        guard let decompressed = (try? (data as NSData).decompressed(using: .lz4)) as Data? else { return nil }
-        return decompressed
+        if #available(iOS 13.0, macOS 10.15, *) {
+            guard let decompressed = (try? (data as NSData).decompressed(using: .lz4)) as Data? else { return nil }
+            return decompressed
+        } else {
+            return nil
+        }
     }
 }

@@ -65,5 +65,6 @@ mock.cache(data: data, for: "mockfile")
 - LQLocalStore+*.swift 功能扩展
 - lqLocalStoreTests/ 单元测试
 
-## 许可证
-MIT License
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.

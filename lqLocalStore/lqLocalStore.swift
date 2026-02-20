@@ -345,6 +345,7 @@ public class LQLocalStore {
     
     // async/await 相关接口见 LQLocalStore+AsyncAwait.swift
     
+#if canImport(UIKit)
     /// 缓存 UIImage
     public func cache(image: UIImage, for fileName: String, expireIn seconds: TimeInterval? = nil) {
         if let data = image.pngData() {
@@ -356,6 +357,7 @@ public class LQLocalStore {
         guard let data = getCachedData(for: fileName) else { return nil }
         return UIImage(data: data)
     }
+#endif
     
     /// 缓存字符串
     public func cache(string: String, for fileName: String, expireIn seconds: TimeInterval? = nil) {
